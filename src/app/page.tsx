@@ -21,9 +21,6 @@ export default async function Home() {
     <main className="mx-auto w-full max-w-5xl px-6 py-10">
       <header className="mb-8">
         <h1 className="text-xl font-semibold">Enquiries</h1>
-        <p className="text-sm text-neutral-500">
-          Everything that&apos;s come in through email, the web form, and the chat widget.
-        </p>
       </header>
 
       <EnquiryBoard
