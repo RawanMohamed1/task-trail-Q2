@@ -183,7 +183,16 @@ export function EnquiryBoard({ initialEnquiries, consultants }: EnquiryBoardProp
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-neutral-200 bg-white dark:border-neutral-800 dark:bg-neutral-900">
-        <table className="w-full text-sm">
+        <table className="w-full table-fixed text-sm">
+          <colgroup>
+            <col className="w-[19%]" />
+            <col className="w-[17%]" />
+            <col className="w-[11%]" />
+            <col className="w-[9%]" />
+            <col className="w-[13%]" />
+            <col className="w-[9%]" />
+            <col className="w-[22%]" />
+          </colgroup>
           <thead>
             <tr className="border-b border-neutral-200 bg-neutral-50 text-left text-neutral-500 dark:border-neutral-800 dark:bg-neutral-900/60">
               <th className="px-4 py-3 font-medium">Contact</th>
@@ -207,28 +216,38 @@ export function EnquiryBoard({ initialEnquiries, consultants }: EnquiryBoardProp
                   className="border-b border-neutral-100 last:border-0 hover:bg-neutral-50 dark:border-neutral-800 dark:hover:bg-neutral-800/40"
                 >
                   <td className="px-4 py-3">
-                    <div className="font-medium">{enquiry.contact_name}</div>
+                    <div className="truncate font-medium" title={enquiry.contact_name}>
+                      {enquiry.contact_name}
+                    </div>
                     {enquiry.company && (
-                      <div className="text-neutral-400">{enquiry.company}</div>
+                      <div className="truncate text-neutral-400" title={enquiry.company}>
+                        {enquiry.company}
+                      </div>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-300">
+                  <td
+                    className="truncate px-4 py-3 text-neutral-600 dark:text-neutral-300"
+                    title={enquiry.role_sought ?? undefined}
+                  >
                     {enquiry.role_sought ?? "—"}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-300">
+                  <td className="truncate px-4 py-3 text-neutral-600 dark:text-neutral-300">
                     {enquiry.location ?? "—"}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-300">
+                  <td className="px-4 py-3 whitespace-nowrap text-neutral-600 dark:text-neutral-300">
                     {formatSalary(enquiry.salary_budget)}
                   </td>
-                  <td className="px-4 py-3 text-neutral-600 dark:text-neutral-300">
+                  <td
+                    className="truncate px-4 py-3 text-neutral-600 dark:text-neutral-300"
+                    title={consultant?.name}
+                  >
                     {consultant ? consultant.name : "Unassigned"}
                   </td>
-                  <td className="px-4 py-3 text-neutral-400">
+                  <td className="px-4 py-3 whitespace-nowrap text-neutral-400">
                     {formatDate(enquiry.created_at)}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col items-start gap-1.5">
                       <StatusBadge status={enquiry.status} />
                       <select
                         value={enquiry.status}
@@ -237,7 +256,7 @@ export function EnquiryBoard({ initialEnquiries, consultants }: EnquiryBoardProp
                         }
                         disabled={isPending}
                         aria-label={`Change status for ${enquiry.contact_name}`}
-                        className="rounded-md border border-neutral-300 bg-white px-1.5 py-0.5 text-xs dark:border-neutral-700 dark:bg-neutral-900"
+                        className="w-full rounded-md border border-neutral-300 bg-white px-1.5 py-0.5 text-xs dark:border-neutral-700 dark:bg-neutral-900"
                       >
                         {STATUS_ORDER.map((s) => (
                           <option key={s} value={s}>
